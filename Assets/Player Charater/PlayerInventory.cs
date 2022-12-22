@@ -4,22 +4,22 @@ using UnityEngine;
 
 namespace SG
 {
-public class PlayerInventory : MonoBehaviour
-{
-   WeaponSlotManager weaponSlotManager;
-   
-   public WeaponItem rightWeapon;
-   public WeaponItem leftWeapon;
+    public class PlayerInventory : MonoBehaviour
+    {
+        WeaponSlotManager weaponSlotManager;
 
-   private void Awake()
-   {
-        weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
-   }
+        public WeaponItem rightWeapon;
+        public WeaponItem leftWeapon;
 
-   private void Start()
-   {
-    weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
-    weaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
-   }
-}
+        private void Awake()
+        {
+            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+        }
+
+        private void Start()
+        {
+            weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
+            weaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
+        }
+    }
 }

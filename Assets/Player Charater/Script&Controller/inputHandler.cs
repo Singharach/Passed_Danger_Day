@@ -14,33 +14,19 @@ namespace SG
 
         public bool b_Input;
         public bool rollFlag;
+        public bool spriteFlag;
         public float rollInputTimer;
 
 
-        public bool isInteracting;
-
-
         PlayerControl inputActions;
-        CameraHandler cameraHandler;
+        
 
         Vector2 movementInput;
         Vector2 cameraInput;
 
-        private void Awake()
-        {
-            cameraHandler = CameraHandler.singleton;
-        }
 
-        private void FixedUpdate()
-        {
-            float delta = Time.fixedDeltaTime;
 
-            if (cameraHandler != null)
-            {
-                cameraHandler.FollowTarget(delta);
-                cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
-            }
-        }
+
         public void OnEnable()
         {
             if (inputActions == null)
@@ -71,15 +57,17 @@ namespace SG
 
         private void HandleRollInput(float delta)
         {
-            b_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+            b_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Performed;
             if (b_Input)
             {
                 rollInputTimer += delta;
+                spriteFlag = true;
             }
             else
             {
                 if(rollInputTimer > 0 && rollInputTimer < 0.5f)
                 {
+                    spriteFlag = false;
                     rollFlag = true;
                 }
                 rollInputTimer = 0;

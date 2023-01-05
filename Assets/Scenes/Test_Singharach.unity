@@ -1072,7 +1072,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733093045}
-  m_LocalRotation: {x: -0.0003722679, y: -0.998087, z: -0.061528794, w: 0.0060387296}
+  m_LocalRotation: {x: -0.00037226765, y: -0.998087, z: -0.061528794, w: 0.006038725}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2400,6 +2400,10 @@ MonoBehaviour:
   b_Input: 0
   rb_Input: 0
   rt_Input: 0
+  d_Pad_Up: 0
+  d_Pad_Down: 0
+  d_Pad_Left: 0
+  d_Pad_Right: 0
   rollFlag: 0
   spriteFlag: 0
   comboFlag: 0
@@ -2431,7 +2435,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightWeapon: {fileID: 11400000, guid: b286592cb5dba3f4ba7cf97fe110fa63, type: 2}
-  leftWeapon: {fileID: 11400000, guid: b286592cb5dba3f4ba7cf97fe110fa63, type: 2}
+  leftWeapon: {fileID: 0}
+  unarmedWeapon: {fileID: 11400000, guid: 3b026fabf14e23a4798611586c76f20e, type: 2}
+  weaponInRightHandSlots:
+  - {fileID: 0}
+  weaponInLeftHandSlots:
+  - {fileID: 0}
+  currentRightWeaponIndex: 0
+  currentLeftWeaponIndex: 0
 --- !u!114 &2063360421
 MonoBehaviour:
   m_ObjectHideFlags: 0

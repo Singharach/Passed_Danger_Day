@@ -2400,6 +2400,10 @@ MonoBehaviour:
   b_Input: 0
   rb_Input: 0
   rt_Input: 0
+  d_Pad_Up: 0
+  d_Pad_Down: 0
+  d_Pad_Left: 0
+  d_Pad_Right: 0
   rollFlag: 0
   spriteFlag: 0
   comboFlag: 0
@@ -2432,6 +2436,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightWeapon: {fileID: 11400000, guid: b286592cb5dba3f4ba7cf97fe110fa63, type: 2}
   leftWeapon: {fileID: 0}
+  unarmedWeapon: {fileID: 11400000, guid: 3b026fabf14e23a4798611586c76f20e, type: 2}
+  weaponInRightHandSlots:
+  - {fileID: 0}
+  weaponInLeftHandSlots:
+  - {fileID: 0}
+  currentRightWeaponIndex: 0
+  currentLeftWeaponIndex: 0
 --- !u!114 &2063360421
 MonoBehaviour:
   m_ObjectHideFlags: 0

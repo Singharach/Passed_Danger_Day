@@ -16,8 +16,10 @@ namespace SG
         public WeaponItem[] weaponInRightHandSlots = new WeaponItem[1];
         public WeaponItem[] weaponInLeftHandSlots = new WeaponItem[1];
 
-        public int currentRightWeaponIndex = -1;
+        public int currentRightWeaponIndex = -1; //Default
         public int currentLeftWeaponIndex = -1;
+
+        public List<WeaponItem> weaponInventory;
 
         private void Awake()
         {
@@ -31,7 +33,7 @@ namespace SG
             leftWeapon = unarmedWeapon;
         }
 
-        public void ChangeRightWeapon()
+        public void ChangeRightWeapon() //LoadWeapon To Hand 
         {
             currentRightWeaponIndex = currentRightWeaponIndex + 1;
 
@@ -56,7 +58,7 @@ namespace SG
 
             }
 
-            if (currentRightWeaponIndex > weaponInRightHandSlots.Length - 1)
+            if (currentRightWeaponIndex > weaponInRightHandSlots.Length - 1) //if Change Load unarmed
             {
                 currentRightWeaponIndex = -1;
                 rightWeapon = unarmedWeapon;

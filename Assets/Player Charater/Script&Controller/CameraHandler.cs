@@ -11,7 +11,7 @@ namespace SG
         public Transform cameraPivotTranform;
         private Transform myTranform;
         private Vector3 cameraTranformPosition;
-        private LayerMask ignoreLayer;
+        public LayerMask ignoreLayer;
 
         public static CameraHandler singleton;
 

@@ -85,7 +85,7 @@ namespace SG
 
         }
 
-        public void HandleMovement(float delta)
+        public void HandleMovement(float delta)//MoveDirection and Sprint 
         {
             if (inputHandler.rollFlag)
                 return;
@@ -121,7 +121,7 @@ namespace SG
             }
         }
 
-        public void HandleRollingAndSprinting(float delta)
+        public void HandleRollingAndSprinting(float delta)//Roll
         {
             if (animatorHandler.anim.GetBool("isInteracting"))
                 return;
@@ -145,7 +145,7 @@ namespace SG
             }
         }
 
-        public void HandleFalling(float delta, Vector3 moveDirection)
+        public void HandleFalling(float delta, Vector3 moveDirection)//Falling
         {
             playerManager.isGrounded = false;
             RaycastHit hit;

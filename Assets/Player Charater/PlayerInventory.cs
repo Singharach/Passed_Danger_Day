@@ -44,7 +44,6 @@ namespace SG
             {
                 currentRightWeaponIndex = currentRightWeaponIndex + 1;
             }
-
             else if (currentRightWeaponIndex == 1 && weaponInRightHandSlots[1] != null)
             {
                 rightWeapon = weaponInRightHandSlots[currentRightWeaponIndex];
@@ -52,7 +51,7 @@ namespace SG
             }
             else if (currentRightWeaponIndex  == 1 && weaponInRightHandSlots[1] == null)
             {
-                currentRightWeaponIndex = currentRightWeaponIndex +1;
+                currentRightWeaponIndex = currentRightWeaponIndex + 1;
 
             }
 

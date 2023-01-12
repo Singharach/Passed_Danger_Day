@@ -139,7 +139,8 @@ namespace SG
             {
                 playerInventory.ChangeRightWeapon();
             }
-            else if (d_Pad_Left)
+
+            if (d_Pad_Left)
             {
                 playerInventory.ChangeLeftWeapon();
             }
@@ -148,6 +149,7 @@ namespace SG
         private void HandleInteractingButtonInput()
         {
             inputActions.PlayerActions.A.performed += i => a_Input = true;
+
         }
     }
 

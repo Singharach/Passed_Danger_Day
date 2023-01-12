@@ -21,7 +21,7 @@ namespace SG
         
         private void Awake()
         {
-            cameraHandler = CameraHandler.singleton;
+            cameraHandler = FindObjectOfType<CameraHandler>();
         }
 
         void Start()
@@ -83,7 +83,7 @@ namespace SG
         {
             RaycastHit hit;
             
-            if(Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraHandler.ignoreLayer))
+            if(Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f))
             {
                 if (hit.collider.tag == "Interactable")
                 {

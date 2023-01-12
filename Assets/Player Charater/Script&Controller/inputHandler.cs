@@ -13,6 +13,7 @@ namespace SG
         public float mouseY;
 
         public bool b_Input;
+        public bool a_Input;
         public bool rb_Input;
         public bool rt_Input;
         public bool d_Pad_Up;
@@ -64,6 +65,7 @@ namespace SG
             HandleRollInput(delta);
             HandleAttackInput(delta);
             HandleQuickSlotsInput();
+            HandleInteractingButtonInput();
         }
         private void MoveInput(float delta)
         {
@@ -84,7 +86,7 @@ namespace SG
             }
             else
             {
-                if(rollInputTimer > 0 && rollInputTimer < 0.5f)
+                if (rollInputTimer > 0 && rollInputTimer < 0.5f)
                 {
                     spriteFlag = false;
                     rollFlag = true;
@@ -92,35 +94,40 @@ namespace SG
                 rollInputTimer = 0;
             }
         }
-    
+
         private void HandleAttackInput(float delta)
         {
             inputActions.PlayerActions.RB.performed += i => rb_Input = true;
             inputActions.PlayerActions.RT.performed += i => rt_Input = true;
 
-            if(rb_Input)
+            if (playerInventory.currentRightWeaponIndex >= 0 || playerInventory.currentLeftWeaponIndex >= 0 && playerInventory.currentRightWeaponIndex >= 0)
             {
-                if (playerManager.canDoCombo)
+                if (rb_Input)
                 {
-                    comboFlag = true;
-                    playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
-                    comboFlag = false;
+                    if (playerManager.canDoCombo)
+                    {
+                        comboFlag = true;
+                        playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
+                        comboFlag = false;
+                    }
+                    else
+                    {
+                        if (playerManager.isInteracting)
+                            return;
+                        if (playerManager.canDoCombo)
+                            return;
+                        playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+                    }
+
+
                 }
-                else
+
+                if (rt_Input)
                 {
-                    if(playerManager.isInteracting)
+                    if (playerManager.isInteracting)
                         return;
-                    if(playerManager.canDoCombo)
-                        return;
-                    playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+                    playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
                 }
-                
-
-            }
-
-            if(rt_Input)
-            {
-                playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
             }
         }
 
@@ -128,14 +135,19 @@ namespace SG
         {
             inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
             inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
-            if(d_Pad_Right)
+            if (d_Pad_Right)
             {
                 playerInventory.ChangeRightWeapon();
             }
-            else if(d_Pad_Left)
+            else if (d_Pad_Left)
             {
                 playerInventory.ChangeLeftWeapon();
             }
+        }
+
+        private void HandleInteractingButtonInput()
+        {
+            inputActions.PlayerActions.A.performed += i => a_Input = true;
         }
     }
 

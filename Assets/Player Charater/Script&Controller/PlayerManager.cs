@@ -11,6 +11,10 @@ namespace SG
         PlayerLocomotion playerLocomotion;
         CameraHandler cameraHandler;
 
+        InteractableUI interactableUI;
+        public GameObject interactableUIGameObject;
+        public GameObject itemInteractableGameObject;
+
         public bool isInteracting;
         [Header("Player Flags")]
         public bool isSprinting;
@@ -29,6 +33,7 @@ namespace SG
             inputHandler = GetComponent<inputHandler>();
             anim = GetComponentInChildren<Animator>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
+            interactableUI = FindObjectOfType<InteractableUI>();
         }
 
         // Update is called once per frame
@@ -72,6 +77,7 @@ namespace SG
             inputHandler.d_Pad_Left = false;
             inputHandler.d_Pad_Right = false;
             inputHandler.a_Input = false;
+            inputHandler.inventory_Input = false;
 
             if (isInAir)
             {
@@ -92,14 +98,26 @@ namespace SG
                     if(interactableObject != null)
                     {
                         string interactableText = interactableObject.interactableText;
-                        //SET THE UI TEXT TO THE INTERRACTABLE OBJECT'S TEXT
-                        //SET THE TEXT POP UP TO TRUE
+                        interactableUI.interactableText.text = interactableText;
+                        interactableUIGameObject.SetActive(true);
 
                         if(inputHandler.a_Input)
                         {
                             hit.collider.GetComponent<Interactable>().Interact(this);
                         }
                     }
+                }
+            }
+            else
+            {
+                if(interactableUIGameObject != null)
+                {
+                    interactableUIGameObject.SetActive(false);
+                }
+
+                if (itemInteractableGameObject != null && inputHandler.a_Input)
+                {
+                    itemInteractableGameObject.SetActive(false);
                 }
             }
         }

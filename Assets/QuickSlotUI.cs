@@ -16,8 +16,8 @@ public class QuickSlotUI : MonoBehaviour
         {
             if(weapon.itemIcon != null)
             {
-            rightWeaponIcon.sprite = weapon.itemIcon;
-            rightWeaponIcon.enabled = true;                
+            rightWeaponIcon.sprite = weapon.itemIcon; //sets sprite rightWeaponIcon object to the itemIcon of the weapon object
+            rightWeaponIcon.enabled = true; // sets enabled rightWeaponIcon to true
             }
             else
             {

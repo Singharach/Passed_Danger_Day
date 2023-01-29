@@ -8,33 +8,33 @@ namespace SG
     public class WeaponSlotManager : MonoBehaviour
     {
         public WeaponItem attackingWeapon;
-        WeaponHolderSlot leftHandSlot;
+        WeaponHolderSlot leftHandSlot; //of type
         WeaponHolderSlot rightHandSlot;
 
         DamageCollider leftHandDamageCollider;
         DamageCollider rightHandDamageCollider;
 
-        Animator animator;
+        Animator animator; //refactored to create an instance of the Animator class and assign it to the animator variable
 
-        QuickSlotUI quickSlotUI;
+        QuickSlotUI quickSlotUI; //creates a new instance of the QuickSlotUI class called quickSlotUI.
 
         PlayerStats playerStats;
 
         private void Awake()
         {
-            animator = GetComponent<Animator>();
-            quickSlotUI = FindObjectOfType<QuickSlotUI>();
+            animator = GetComponent<Animator>(); //get the Animator component from a game object
+            quickSlotUI = FindObjectOfType<QuickSlotUI>(); //finds the QuickSlotUI object in the scene and assigns it to the variable quickSlotUI
             playerStats = GetComponentInParent<PlayerStats>();
 
 
-            WeaponHolderSlot[] weaponHolderSlot = GetComponentsInChildren<WeaponHolderSlot>();
-            foreach (WeaponHolderSlot weaponSlot in weaponHolderSlot)
+            WeaponHolderSlot[] weaponHolderSlot = GetComponentsInChildren<WeaponHolderSlot>(); //creates an array of WeaponHolderSlot objects called weaponHolderSlot
+            foreach (WeaponHolderSlot weaponSlot in weaponHolderSlot) //looping an array of WeaponHolderSlot objects called weaponHolderSlot and assigning each element to the variable weaponSlot
             {
-                if (weaponSlot.isLeftHandSlot)
+                if (weaponSlot.isLeftHandSlot) //check left
                 {
-                    leftHandSlot = weaponSlot;
+                    leftHandSlot = weaponSlot; //assigns value of variable weaponSlot to the variable leftHandSlot
                 }
-                else if (weaponSlot.isRightHandSlot)
+                else if (weaponSlot.isRightHandSlot) //check right
                 {
                     rightHandSlot = weaponSlot;
                 }
@@ -45,18 +45,18 @@ namespace SG
         {
             if (isLeft)
             {
-                leftHandSlot.LoadWeaponModel(weaponItem);
+                leftHandSlot.LoadWeaponModel(weaponItem); //function that loads a weapon model into the left hand slot of the character
                 LoadLeftWeaponDamageCollider();
-                quickSlotUI.UpdateWeaponQuickSlot(true, weaponItem);
+                quickSlotUI.UpdateWeaponQuickSlot(true, weaponItem); //updates the weapon quick slot UI with a given weapon item
 
                 #region  Handle Left Weapon Idel Animations
                 if(weaponItem != null)
                 {
-                    animator.CrossFade(weaponItem.left_hand_idle, 0.2f);
-                }
+                    animator.CrossFade(weaponItem.left_hand_idle, 0.2f); //used to animate a character in a game 
+                }           //CrossFade animator object to transition from the current animation state to the left_hand_idle
                 else
                 {
-                    animator.CrossFade("Left Arm Empty", 0.2f);
+                    animator.CrossFade("Left Arm Empty", 0.2f); //animation to crossfade from the current animation to the animation named "Left Arm Empty"
                 }
                 #endregion
             }

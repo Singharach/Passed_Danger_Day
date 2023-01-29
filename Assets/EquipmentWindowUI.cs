@@ -11,24 +11,24 @@ public class EquipmentWindowUI : MonoBehaviour
     public bool leftHandSlot01Selected;
     public bool leftHandSlot02Selected;
 
-    HandEquipmentSlotUI[] handEquipmentSlotUI;
+    HandEquipmentSlotUI[] handEquipmentSlotUI; //declares an array of HandEquipmentSlotUI objects
 
     private void Start()
     {
-        handEquipmentSlotUI = GetComponentsInChildren<HandEquipmentSlotUI>();
+        handEquipmentSlotUI = GetComponentsInChildren<HandEquipmentSlotUI>(); //uses the GetComponentsInChildren method to get all components of type HandEquipmentSlotUI in the children of the current game object
     }
 
     public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory)
     {
         for (int i = 0; 1 < handEquipmentSlotUI.Length; i++)
         {
-            if (handEquipmentSlotUI[i].rightHandSlot01)
+            if (handEquipmentSlotUI[i].rightHandSlot01) //checking if array at index i is true
             {
-                handEquipmentSlotUI[i].AddItem(playerInventory.weaponInRightHandSlots[0]);
+                handEquipmentSlotUI[i].AddItem(playerInventory.weaponInRightHandSlots[0]); //adds an item from the playerInventory
             }
             else if (handEquipmentSlotUI[i].rightHandSlot02)
             {
-                handEquipmentSlotUI[i].AddItem(playerInventory.weaponInRightHandSlots[1]);
+                handEquipmentSlotUI[i].AddItem(playerInventory.weaponInRightHandSlots[1]); //adds an item from the playerInventory
             }
             else if (handEquipmentSlotUI[i].leftHandSlot01)
             {
@@ -43,7 +43,7 @@ public class EquipmentWindowUI : MonoBehaviour
 
     public void SelectRightHandSlot01()
     {
-        rightHandSlot01Selected = true;
+        rightHandSlot01Selected = true; //sets to true
     }
 
     public void SelectRightHandSlot02()

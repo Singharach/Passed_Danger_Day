@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     public PlayerInventory playerInventory;
     EquipmentWindowUI equipmentWindowUI;
 
-    [Header("UI Window")]
+    [Header("UI Window")] //create a header in a script
     public GameObject hudWindow;
     public GameObject selectWindow;
     public GameObject weaponInventoryWindow;
@@ -22,13 +22,13 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        equipmentWindowUI = FindObjectOfType<EquipmentWindowUI>();
+        equipmentWindowUI = FindObjectOfType<EquipmentWindowUI>(); //find object of type EquipmentWindowUI in the current scene
     }
 
     private void Start()
     {
-        weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
-        equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
+        weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>(); //gets all of the components of type WeaponInventorySlot that are children of the weaponInventorySlotsParent object
+        equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory); //loads the weapons from the player's inventory onto the equipment window user interface
     }
 
     public void UpdateUI()
@@ -40,14 +40,14 @@ public class UIManager : MonoBehaviour
             {
                 if (weaponInventorySlots.Length < playerInventory.weaponInventory.Count)
                 {
-                    Instantiate(weaponInventorySlotPrefab, weaponInventorySlotsParent);
-                    weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
+                    Instantiate(weaponInventorySlotPrefab, weaponInventorySlotsParent);//creates an instance and attaches it to the weaponInventorySlotsParent game object
+                    weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>(); //retrieves all and stores them in an array called weaponInventorySlots
                 }
-                weaponInventorySlots[i].AddItem(playerInventory.weaponInventory[i]);
+                weaponInventorySlots[i].AddItem(playerInventory.weaponInventory[i]); //adds an item from the player's weapon inventory to a weapon inventory slot
             }
             else
             {
-                weaponInventorySlots[i].ClearInventorySlot();
+                weaponInventorySlots[i].ClearInventorySlot(); //clears the inventory slot at the index i in the weaponInventorySlots array
             }
         }
 

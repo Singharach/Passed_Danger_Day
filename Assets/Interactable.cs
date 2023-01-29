@@ -11,8 +11,8 @@ namespace SG
 
         private void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, radius);
+            Gizmos.color = Color.blue; //sets color Gizmos object to blue using the Color class
+            Gizmos.DrawWireSphere(transform.position, radius); //draws a wire sphere at the position of the transform object
         }
 
         public virtual void Interact(PlayerManager playerManager)

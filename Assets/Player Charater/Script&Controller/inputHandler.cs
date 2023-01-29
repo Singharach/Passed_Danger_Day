@@ -16,6 +16,7 @@ namespace SG
         public bool a_Input;
         public bool rb_Input;
         public bool rt_Input;
+        public bool jump_Input;
         public bool inventory_Input;
 
         public bool d_Pad_Up;
@@ -57,6 +58,13 @@ namespace SG
                 inputActions = new PlayerControl();
                 inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
                 inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+                inputActions.PlayerActions.RB.performed += i => rb_Input = true;
+                inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+                inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+                inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+                inputActions.PlayerActions.Jump.performed += inputActions => jump_Input = true;
+                inputActions.PlayerActions.A.performed += i => a_Input = true;
+                inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
             }
             inputActions.Enable();
         }
@@ -70,8 +78,8 @@ namespace SG
             HandleRollInput(delta);
             HandleAttackInput(delta);
             HandleQuickSlotsInput();
-            HandleInteractingButtonInput();
             HandleInventoryInput();
+
         }
         private void MoveInput(float delta)
         {
@@ -85,10 +93,11 @@ namespace SG
         private void HandleRollInput(float delta)
         {
             b_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Performed;
+            spriteFlag = b_Input;
             if (b_Input)
             {
                 rollInputTimer += delta;
-                spriteFlag = true;
+                
             }
             else
             {
@@ -103,8 +112,7 @@ namespace SG
 
         private void HandleAttackInput(float delta)
         {
-            inputActions.PlayerActions.RB.performed += i => rb_Input = true;
-            inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+
 
             if (playerInventory.currentRightWeaponIndex >= 0 || playerInventory.currentLeftWeaponIndex >= 0 && playerInventory.currentRightWeaponIndex >= 0)
             {
@@ -139,28 +147,26 @@ namespace SG
 
         private void HandleQuickSlotsInput()
         {
-            inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
-            inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+
             if (d_Pad_Right)
             {
+                if (playerManager.isInteracting)
+                    return;
                 playerInventory.ChangeRightWeapon();
             }
 
             if (d_Pad_Left)
             {
+                if (playerManager.isInteracting)
+                    return;
                 playerInventory.ChangeLeftWeapon();
             }
         }
 
-        private void HandleInteractingButtonInput()
-        {
-            inputActions.PlayerActions.A.performed += i => a_Input = true;
-
-        }
 
         private void HandleInventoryInput()
         {
-            inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
+            
 
             if (inventory_Input)
             {
@@ -180,6 +186,8 @@ namespace SG
                 }
             }
         }
+
+
     }
 
 }

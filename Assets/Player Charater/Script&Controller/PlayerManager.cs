@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SG
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : CharacterManager
     {
         inputHandler inputHandler;
         Animator anim;
@@ -42,13 +42,12 @@ namespace SG
             float delta = Time.deltaTime;
             isInteracting = anim.GetBool("isInteracting");
             canDoCombo = anim.GetBool("canDoCombo");
-
-            isSprinting = inputHandler.b_Input;
+            anim.SetBool("isInAir", isInAir);
+            
             inputHandler.TickInput(delta);
-            playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
-            playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
-
+            playerLocomotion.HandleJumping();
+            
             CheckForInteractableObject();
 
 
@@ -57,18 +56,15 @@ namespace SG
         private void FixedUpdate()
         {
             float delta = Time.fixedDeltaTime;
-
-            if (cameraHandler != null)
-            {
-                cameraHandler.FollowTarget(delta);
-                cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
-            }
+            playerLocomotion.HandleMovement(delta);
+            playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
+            
+   
         }
 
         private void LateUpdate()
         {
             inputHandler.rollFlag = false;
-            inputHandler.spriteFlag = false;
             isSprinting = inputHandler.b_Input;
             inputHandler.rb_Input = false;
             inputHandler.rt_Input = false;
@@ -78,6 +74,15 @@ namespace SG
             inputHandler.d_Pad_Right = false;
             inputHandler.a_Input = false;
             inputHandler.inventory_Input = false;
+            inputHandler.jump_Input = false;
+
+            float delta = Time.deltaTime;
+
+            if (cameraHandler != null)
+            {
+                cameraHandler.FollowTarget(delta);
+                cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
+            }
 
             if (isInAir)
             {

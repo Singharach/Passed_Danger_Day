@@ -14,9 +14,9 @@ namespace SG
 
         public void UnloadWeapon()
         {
-            if (currentWeaponModel != null)
+            if (currentWeaponModel != null) 
             {
-                currentWeaponModel.SetActive(false);
+                currentWeaponModel.SetActive(false); //SetActive used to deactivate a game object
             }
         }
 
@@ -30,32 +30,32 @@ namespace SG
 
         public void LoadWeaponModel(WeaponItem weaponItem)
         {
-            UnloadWeaponAndDestroy();
+            UnloadWeaponAndDestroy(); //function that unloads a weapon and destroys it
 
             if (weaponItem == null)
             {
-                UnloadWeapon();
+                UnloadWeapon(); //function that unloads the current weapon
                 return;
             }
 
-            GameObject model = Instantiate(weaponItem.modelPrefab) as GameObject;
+            GameObject model = Instantiate(weaponItem.modelPrefab) as GameObject; //
             if (model != null)
             {
                 if (parentOverride != null)
                 {
-                    model.transform.parent = parentOverride;
+                    model.transform.parent = parentOverride; //sets the parent model.transform to parentOverride
                 }
                 else
                 {
-                    model.transform.parent = transform;
+                    model.transform.parent = transform; //sets the parent model transform to the transform variable
                 }
 
-                model.transform.localPosition = Vector3.zero;
+                model.transform.localPosition = Vector3.zero; //sets
                 model.transform.localRotation = Quaternion.identity;
                 model.transform.localScale = Vector3.one;
             }
 
-            currentWeaponModel = model;
+            currentWeaponModel = model; //assigns the value of the variable "model" to the variable "currentWeaponModel"
         }
     }
 }

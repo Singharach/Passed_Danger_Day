@@ -13,7 +13,7 @@ namespace SG
 
         public WeaponItem unarmedWeapon;
 
-        public WeaponItem[] weaponInRightHandSlots = new WeaponItem[1];
+        public WeaponItem[] weaponInRightHandSlots = new WeaponItem[1]; //creates an array of WeaponItem objects called weaponInRightHandSlots with a size
         public WeaponItem[] weaponInLeftHandSlots = new WeaponItem[1];
 
         public int currentRightWeaponIndex = -1; //Default
@@ -23,7 +23,7 @@ namespace SG
 
         private void Awake()
         {
-            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>(); //get the WeaponSlotManager component from the children of the current object
 
         }
 
@@ -35,12 +35,12 @@ namespace SG
 
         public void ChangeRightWeapon() //LoadWeapon To Hand 
         {
-            currentRightWeaponIndex = currentRightWeaponIndex + 1;
+            currentRightWeaponIndex = currentRightWeaponIndex + 1; //increases value 1
 
             if (currentRightWeaponIndex == 0 && weaponInRightHandSlots[0] != null)
             {
-                rightWeapon = weaponInRightHandSlots[currentRightWeaponIndex];
-                weaponSlotManager.LoadWeaponOnSlot(weaponInRightHandSlots[currentRightWeaponIndex], false);
+                rightWeapon = weaponInRightHandSlots[currentRightWeaponIndex]; //assigns the variable rightWeapon to the value of the element in the array
+                weaponSlotManager.LoadWeaponOnSlot(weaponInRightHandSlots[currentRightWeaponIndex], false); //calling the LoadWeaponOnSlot function from the weaponSlotManager object
             }
             else if (currentRightWeaponIndex == 0 && weaponInRightHandSlots[0] == null)
             {
@@ -59,9 +59,9 @@ namespace SG
 
             if (currentRightWeaponIndex > weaponInRightHandSlots.Length - 1) //if Change Load unarmed
             {
-                currentRightWeaponIndex = -1;
+                currentRightWeaponIndex = -1; //no current right weapon
                 rightWeapon = unarmedWeapon;
-                weaponSlotManager.LoadWeaponOnSlot(unarmedWeapon, false);
+                weaponSlotManager.LoadWeaponOnSlot(unarmedWeapon, false); //calling the LoadWeaponOnSlot() function from the weaponSlotManager object
             }
 
         }

@@ -11,11 +11,11 @@ public class EquipmentWindowUI : MonoBehaviour
     public bool leftHandSlot01Selected;
     public bool leftHandSlot02Selected;
 
-    HandEquipmentSlotUI[] handEquipmentSlotUI; //declares an array of HandEquipmentSlotUI objects
+    public HandEquipmentSlotUI[] handEquipmentSlotUI; //declares an array of HandEquipmentSlotUI objects
 
     private void Start()
     {
-        handEquipmentSlotUI = GetComponentsInChildren<HandEquipmentSlotUI>(); //uses the GetComponentsInChildren method to get all components of type HandEquipmentSlotUI in the children of the current game object
+ 
     }
 
     public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory)
